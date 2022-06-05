@@ -124,4 +124,4 @@ async def on_message(message):
             await message.channel.send(punish_user(author_id))
 
 
-client.run('token')
+client.run('ODI1NTAyODA2MTE5MDIyNjAz.Gw-4SQ.yausTuZVDg0L9wYl9ysoMM_LEhZ9gRj2J9rlkM')
