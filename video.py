@@ -1,80 +1,3 @@
-import random
-import os
-import discord
-
-import discord as command
-
-
-class TrieNode:
-
-    def __init__(self, char):
-        self.char = char
-
-        self.is_end = False
-
-        self.children = {}
-
-
-class Trie(object):
-
-    def __init__(self):
-
-        self.root = TrieNode("")
-
-    def insert(self, word):
-
-        node = self.root
-
-        for char in word:
-            if char in node.children:
-                node = node.children[char]
-            else:
-
-                new_node = TrieNode(char)
-                node.children[char] = new_node
-                node = new_node
-
-        node.is_end = True
-
-    def dfs(self, node, pre):
-
-        if node.is_end:
-            self.output.append((pre + node.char))
-
-        for child in node.children.values():
-            self.dfs(child, pre + node.char)
-
-    def search(self, x):
-
-        node = self.root
-
-        for char in x:
-            if char in node.children:
-                node = node.children[char]
-            else:
-
-                return []
-
-        self.output = []
-        self.dfs(node, x[:-1])
-
-        return self.output
-
-
-client = discord.Client()
-trie = Trie()
-table = {
-    "\"": None,
-    "'": None,
-    "-": None,
-    "`": None,
-    "~": None,
-    ",": None,
-    ".": None,
-    ":": None,
-    ";": None,
-    "_": None
-}
 
 
 def trie1():
@@ -94,7 +17,7 @@ def punish_user(user_id):
         "Hey now {}, watch your mouth.",
         "We don't use that kind of language here, {}."
     ]
-
+    # list of possible sayings
     choice = random.choice(responses)
     choice = choice.format(user_id)
 
@@ -106,6 +29,8 @@ async def on_ready():
     trie1()
     print("Trie is built. ready to read messages.")
 
+
+# notifys me that the bot is online on discord
 
 @client.event
 async def on_message(message):
@@ -124,4 +49,8 @@ async def on_message(message):
             await message.channel.send(punish_user(author_id))
 
 
-client.run('ODI1NTAyODA2MTE5MDIyNjAz.Gw-4SQ.yausTuZVDg0L9wYl9ysoMM_LEhZ9gRj2J9rlkM')
+# checks if the user says something that is on the list of banned words
+
+client.run('token')
+# runs on discord
+
